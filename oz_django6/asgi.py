@@ -14,3 +14,5 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "oz_django6.settings")
 
 application = get_asgi_application()
+
+# temp 주석
