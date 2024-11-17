@@ -1,8 +1,7 @@
-my_list: list[int | str] = [1, "1"]
 
-my_dict: dict[str, int] = {"a": 1}
 
-my_tuple: tuple[int, ...] = (
-    1,
-    3,
-)
+def my_func(my_var: int | None) -> None:
+    print(my_var)
+
+
+my_func(None)
