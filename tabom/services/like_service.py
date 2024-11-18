@@ -23,4 +23,11 @@ def do_like(user_id: int, article_id: int) -> Like:
 
 
 def undo_like(user_id: int, article_id: int) -> None:
-    Like.objects.filter(user_id=user_id, article_id=article_id).delete()
+    # get() 이후에 delete() 하는 방법
+    # like = Like.objects.filter(user_id=user_id, article_id=article_id).get()  # SELECT
+    # like.delete()  # DELETE
+
+    # queryset 에 delete() 를 호출하는 방법
+    # 대부분의 경우에는 더 나은 방법.
+    # 삭제할 데이터가 없어도 에러 없습니다.
+    Like.objects.filter(user_id=user_id, article_id=article_id).delete()  # DELETE
