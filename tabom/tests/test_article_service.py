@@ -32,16 +32,16 @@ class TestArticleService(TestCase):
         Like.objects.create(user_id=user.id, article_id=articles[-1].id)
 
         # When
-        result_articles = get_article_list(0, 10)
-
-        # Then
         with self.assertNumQueries(2):
+            result_articles = get_article_list(0, 10)
+            result_counts = [a.like_set.count() for a in result_articles]
 
+            # Then
             # 실제로 쿼리가 나가는 지점. (왜? len() 으로 감쌋기 때문에,
             # queryset 은 evaluate 될 때 sql 이 실행되니까)
             self.assertEqual(len(result_articles), 10)  # 길이가 10개가 맞는지
 
-            self.assertEqual(1, result_articles[0].like_set.count())
+            self.assertEqual(1, result_counts[0])  # 11월 20일에 수정된 부분
 
             # 내림차순대로 10개가 가져와진 것이 맞는지
             self.assertEqual([a.id for a in reversed(articles[10:21])], [a.id for a in result_articles])

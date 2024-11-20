@@ -9,4 +9,4 @@ def get_an_article(article_id: int) -> Article:
 
 # Article 이 들어있는 쿼리셋을 반환할 것이다.
 def get_article_list(offset: int, limit: int) -> QuerySet[Article]:
-    return Article.objects.order_by("-id")[offset : offset + limit]
+    return Article.objects.order_by("-id").prefetch_related("like_set")[offset : offset + limit]
